@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import { db } from "./lib/prisma";
 import { BarbershopItem } from "@/components/babershop-item";
-import { Footer } from "@/components/footer";
 import { quickSearchOptions } from "@/constants/search";
 import { BookingItem } from "@/components/booking-item";
 
@@ -90,8 +89,6 @@ export default async function Home() {
           })}
         </div>
       </div>
-
-      <Footer />
     </>
   );
 }

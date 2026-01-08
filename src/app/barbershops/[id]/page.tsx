@@ -3,9 +3,10 @@ import Link from "next/link";
 
 import { db } from "@/app/lib/prisma";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, MapPin, Menu, Star } from "lucide-react";
+import { ChevronLeft, MapPin, Menu, Smartphone, Star } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ServiceItem } from "@/components/service-item";
+import { ClipboardButton } from "@/components/clipboard-button";
 
 export default async function BarbershopPage({
   params,
@@ -74,13 +75,27 @@ export default async function BarbershopPage({
         <p className="text-justify text-sm">{barbershop.description}</p>
       </div>
 
-      <div className="space-y-3 p-4">
+      <div className="space-y-3 border-b border-solid p-4">
         <h2 className="text-xs font-bold uppercase text-gray-400">Serviços</h2>
         <div className="space-y-4">
           {barbershop.services.map((service) => {
             return <ServiceItem key={service.id} service={service} />;
           })}
         </div>
+      </div>
+
+      <div className="space-y-3 p-4">
+        {barbershop.phones.map((phone, index) => {
+          return (
+            <div key={index} className="flex justify-between">
+              <div className="flex items-center gap-2">
+                <Smartphone />
+                <p className="text-sm">{phone}</p>
+              </div>
+              <ClipboardButton text={phone} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
