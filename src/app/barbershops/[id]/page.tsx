@@ -5,6 +5,7 @@ import { db } from "@/app/lib/prisma";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, MapPin, Menu, Star } from "lucide-react";
 import { notFound } from "next/navigation";
+import { ServiceItem } from "@/components/service-item";
 
 export default async function BarbershopPage({
   params,
@@ -14,6 +15,9 @@ export default async function BarbershopPage({
   const barbershop = await db.barbershop.findUnique({
     where: {
       id: params.id,
+    },
+    include: {
+      services: true,
     },
   });
 
@@ -53,7 +57,7 @@ export default async function BarbershopPage({
         </Button>
       </div>
 
-      <div className="border-b border-solid p-5">
+      <div className="border-b border-solid p-4">
         <h1 className="mb-3 text-xl font-bold">{barbershop.name}</h1>
         <div className="mb-2 flex items-center gap-1">
           <MapPin className="gap-2 text-primary" size={18} />
@@ -65,9 +69,18 @@ export default async function BarbershopPage({
         </div>
       </div>
 
-      <div className="space-y-3 border-b border-solid p-5">
+      <div className="space-y-3 border-b border-solid p-4">
         <h2 className="text-grayu-400 font-bold uppercase">Sobre nós</h2>
         <p className="text-justify text-sm">{barbershop.description}</p>
+      </div>
+
+      <div className="space-y-3 p-4">
+        <h2 className="text-xs font-bold uppercase text-gray-400">Serviços</h2>
+        <div className="space-y-4">
+          {barbershop.services.map((service) => {
+            return <ServiceItem key={service.id} service={service} />;
+          })}
+        </div>
       </div>
     </div>
   );
