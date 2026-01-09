@@ -2,11 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { db } from "@/app/lib/prisma";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, MapPin, Menu, Smartphone, Star } from "lucide-react";
 import { notFound } from "next/navigation";
 import { ServiceItem } from "@/components/service-item";
 import { ClipboardButton } from "@/components/clipboard-button";
+import { MenuIcon } from "lucide-react";
+import { SidebarSheet } from "@/components/sidebar-sheet";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 
 export default async function BarbershopPage({
   params,
@@ -48,14 +51,25 @@ export default async function BarbershopPage({
           </Link>
         </Button>
 
-        <Button
-          size="icon"
-          className="absolute right-4 top-4"
-          variant="secondary"
-        >
+        <Button size="icon" variant="secondary">
           <Menu />
           <span className="sr-only">Menu</span>
         </Button>
+
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              size="icon"
+              variant="secondary"
+              className="absolute right-4 top-4"
+            >
+              <MenuIcon />
+              <span className="sr-only">Menu Button</span>
+            </Button>
+          </SheetTrigger>
+
+          <SidebarSheet />
+        </Sheet>
       </div>
 
       <div className="border-b border-solid p-4">
