@@ -2,10 +2,18 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { Button } from "./ui/button";
-import { Calendar, Home, LogOut } from "lucide-react";
+import { Calendar, Home, LogInIcon, LogOut } from "lucide-react";
 import { SheetClose, SheetContent, SheetHeader, SheetTitle } from "./ui/sheet";
 import { quickSearchOptions } from "@/constants/search";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+  DialogTitle,
+  DialogDescription,
+} from "./ui/dialog";
+// import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function SidebarSheet() {
   return (
@@ -14,8 +22,34 @@ export function SidebarSheet() {
         <SheetTitle className="text-left">Menu</SheetTitle>
       </SheetHeader>
 
-      <div className="flex items-center gap-3 border-b border-solid py-5">
-        <Avatar>
+      <div className="flex items-center justify-between gap-3 border-b border-solid py-5">
+        <h2 className="text-lg font-bold">Olá, faça seu login!</h2>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button size="icon">
+              <LogInIcon />
+              <span className="sr-only">Sign In</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="w-[90%]">
+            <DialogHeader>
+              <DialogTitle>Faça login na plataforma</DialogTitle>
+              <DialogDescription>
+                Conecte-se usando sua conta Google
+              </DialogDescription>
+            </DialogHeader>
+            <Button variant="outline" className="gap-1 font-semibold">
+              <Image
+                src="/google-icon.svg"
+                alt="Google Icon"
+                width={18}
+                height={18}
+              />
+              Entrar com o Google
+            </Button>
+          </DialogContent>
+        </Dialog>
+        {/* <Avatar>
           <AvatarImage src="https://github.com/alvarosena.png" />
           <AvatarFallback />
         </Avatar>
@@ -23,7 +57,7 @@ export function SidebarSheet() {
         <div>
           <p className="font-semibold">John Doe</p>
           <p className="text-xs">jon@acme.com</p>
-        </div>
+        </div> */}
       </div>
 
       <div className="flex flex-col gap-2 border-b border-solid py-5">
